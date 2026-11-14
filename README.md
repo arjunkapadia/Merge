@@ -14,7 +14,8 @@ That's fine for filming a reel. To collect real signatures from the public, conn
 ## 1. Connect the signature backend (Google Sheets)
 
 1. Create a new Google Sheet, for example "GTA VI petition signatures".
-2. In the sheet, open **Extensions → Apps Script**.
+2. In the sheet, open **Extensions → Apps Script**, or go to script.google.com and click **New project**
+   (then set `SPREADSHEET_ID` in the code to your sheet's ID, the long code in its URL).
 3. Delete the starter code, paste in everything from `backend/Code.gs`, and save.
 4. Click **Deploy → New deployment**, choose type **Web app**, and set:
    - Execute as: **Me**

@@ -8,11 +8,14 @@
  * Setup: see README.md, section "Connect the signature backend".
  */
 
+// Your "GTA VI Petition" Google Sheet. Lets the script work even when it is
+// created on its own at script.google.com instead of via Extensions > Apps Script.
+const SPREADSHEET_ID = '1VoQEyYI9ePJkRZpJ7KUvrdL8xc3AFj4Q9HDXR2SFbvQ';
 const SHEET_NAME = 'Signatures';
 const HEADERS = ['Timestamp', 'Name', 'Email', 'Country', 'Pledge to buy', 'Platform', 'Comment', 'Wants updates'];
 
 function sheet_() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.getActiveSpreadsheet() || SpreadsheetApp.openById(SPREADSHEET_ID);
   let sh = ss.getSheetByName(SHEET_NAME);
   if (!sh) {
     sh = ss.insertSheet(SHEET_NAME);
