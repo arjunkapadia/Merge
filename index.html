@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>15 Minutes in Leonida</title>
+<meta name="description" content="A fan petition asking Netflix and Rockstar Games for a one-day, 15-minute GTA VI trial for Netflix subscribers, with a launch discount for players who decide to buy.">
+<meta property="og:title" content="15 Minutes in Leonida: the GTA VI trial petition">
+<meta property="og:description" content="Let Netflix subscribers play the first 15 minutes of GTA VI for one day. Sign the fan petition.">
+<meta name="theme-color" content="#0d1b22">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: two-column hero (pitch + live signing card), then single reading column for the proposal, letter and FAQ. */
+:root {
+  --night: #0d1b22;      /* page ground: humid night sky */
+  --deep: #12262f;       /* raised panels */
+  --line: #24414c;       /* hairlines on night */
+  --ink: #eef3f1;        /* main text */
+  --muted: #9fb4b3;      /* secondary text */
+  --coral: #ff6f59;      /* the one accent: sodium-lamp sunset */
+  --coral-ink: #1a0f0c;  /* text on coral */
+  --palm: #3fd0a5;       /* success state */
+  --display: "Anton", "Impact", "Arial Narrow", sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--ink);
+  font: 400 16px/1.6 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--coral); }
+:focus-visible { outline: 3px solid var(--coral); outline-offset: 2px; }
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- top bar ---------- */
+.bar { border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 14px; }
+.tag { font: 700 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.tag b { color: var(--coral); }
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 70% at 85% 110%, rgba(255,111,89,.30), transparent 60%),
+    linear-gradient(180deg, var(--night) 0%, #10232b 100%);
+}
+.hero::after { /* horizon line */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--coral), transparent);
+  opacity: .6;
+}
+.hero .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  gap: 48px;
+  padding-block: 56px 64px;
+  align-items: start;
+}
+.eyebrow { font: 700 13px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--coral); margin: 0 0 18px; }
+h1 {
+  font: 400 clamp(52px, 8.4vw, 112px)/.9 var(--display);
+  text-transform: uppercase;
+  letter-spacing: .005em;
+  margin: 0 0 24px;
+  text-wrap: balance;
+}
+h1 .clock { color: var(--coral); font-family: var(--mono); font-weight: 700; font-size: .78em; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.lede { font-size: clamp(17px, 2vw, 20px); color: var(--ink); max-width: 34em; margin: 0 0 28px; }
+.lede em { font-style: normal; color: var(--coral); }
+
+.terms { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 32px; padding: 0; list-style: none; }
+.terms li {
+  font: 500 13px/1 var(--mono);
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+}
+.terms li b { color: var(--ink); font-weight: 700; }
+
+.tally { max-width: 520px; }
+.tally-num { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.tally-num strong { font: 700 clamp(36px, 5vw, 52px)/1 var(--mono); font-variant-numeric: tabular-nums; }
+.tally-num span { color: var(--muted); }
+.meter { height: 10px; background: var(--deep); border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; background: var(--coral); border-radius: inherit; transition: width .8s cubic-bezier(.2,.8,.2,1); }
+.tally small { display: block; margin-top: 8px; color: var(--muted); font: 500 12px/1.4 var(--mono); }
+
+/* ---------- signing card ---------- */
+.card {
+  background: var(--deep);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 26px;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.7);
+}
+.card h2 { font: 400 32px/1 var(--display); text-transform: uppercase; margin: 0 0 6px; letter-spacing: .01em; }
+.card > p { margin: 0 0 20px; color: var(--muted); font-size: 15px; }
+form { display: grid; gap: 14px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+label { display: grid; gap: 6px; font: 500 13px/1.2 var(--body); color: var(--muted); }
+input[type="text"], input[type="email"], select, textarea {
+  width: 100%;
+  font: 400 16px/1.3 var(--body);
+  color: var(--ink);
+  background: var(--night);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+}
+textarea { resize: vertical; min-height: 64px; }
+input:focus, select:focus, textarea:focus { border-color: var(--coral); outline: none; box-shadow: 0 0 0 3px rgba(255,111,89,.25); }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--ink); line-height: 1.45; cursor: pointer; }
+.check input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--coral); flex: none; }
+.check small { display: block; color: var(--muted); font-size: 12.5px; }
+.pledge { border: 1px dashed var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 10px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+button.cta, a.cta {
+  display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+  font: 400 22px/1 var(--display);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  color: var(--coral-ink);
+  background: var(--coral);
+  border: 0;
+  border-radius: 10px;
+  padding: 18px 22px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .15s ease, filter .15s ease;
+}
+button.cta:hover, a.cta:hover { filter: brightness(1.07); transform: translateY(-1px); }
+button.cta:disabled { opacity: .6; cursor: wait; transform: none; }
+.fine { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.5; }
+.msg { font-size: 14px; margin: 0; min-height: 1.2em; }
+.msg.err { color: var(--coral); }
+
+.done { text-align: left; display: grid; gap: 14px; }
+.done h2 { color: var(--palm); }
+.share { display: flex; flex-wrap: wrap; gap: 8px; }
+.share a, .share button {
+  font: 700 13px/1 var(--mono);
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 11px 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.share a:hover, .share button:hover { border-color: var(--coral); color: var(--coral); }
+
+.preview-note {
+  font: 500 12px/1.4 var(--mono);
+  color: var(--night);
+  background: var(--palm);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin: 0 0 16px;
+}
+
+/* ---------- recent signers ---------- */
+.recent { margin-top: 28px; max-width: 520px; }
+.recent h3 { font: 700 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.recent ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.recent li { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.recent li span:last-child { color: var(--muted); font: 500 12px/1.6 var(--mono); white-space: nowrap; }
+
+/* ---------- body sections ---------- */
+section.block { padding-block: 72px; border-bottom: 1px solid var(--line); }
+.block h2 { font: 400 clamp(36px, 5vw, 56px)/1 var(--display); text-transform: uppercase; margin: 0 0 12px; text-wrap: balance; }
+.block .intro { color: var(--muted); max-width: 40em; margin: 0 0 36px; font-size: 17px; }
+
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.step { border-top: 2px solid var(--coral); padding-top: 18px; }
+.step .t { font: 700 14px/1 var(--mono); color: var(--coral); letter-spacing: .06em; }
+.step h3 { font: 700 20px/1.25 var(--body); margin: 10px 0 8px; }
+.step p { margin: 0; color: var(--muted); }
+
+.letter {
+  max-width: 680px;
+  background: var(--deep);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(22px, 4vw, 44px);
+}
+.letter p { margin: 0 0 16px; }
+.letter .to { font: 700 13px/1.5 var(--mono); color: var(--muted); letter-spacing: .04em; }
+.letter .sig { font: 400 26px/1 var(--display); text-transform: uppercase; color: var(--coral); margin-top: 24px; }
+
+.faq { max-width: 760px; display: grid; gap: 0; }
+details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+summary { cursor: pointer; font: 700 18px/1.35 var(--body); list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--mono); color: var(--coral); }
+details[open] summary::after { content: "–"; }
+details p { color: var(--muted); margin: 12px 0 0; max-width: 62ch; }
+
+.closer { text-align: left; }
+.closer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; padding-block: 64px; }
+.closer h2 { font: 400 clamp(36px, 5vw, 60px)/1 var(--display); text-transform: uppercase; margin: 0; max-width: 14em; }
+
+footer { padding-block: 32px 48px; }
+footer p { font-size: 12.5px; color: var(--muted); max-width: 72ch; margin: 0 0 10px; }
+
+@media (max-width: 880px) {
+  .hero .wrap { grid-template-columns: 1fr; gap: 36px; padding-block: 40px 48px; }
+  .steps { grid-template-columns: 1fr; }
+}
+@media (max-width: 460px) {
+  .row { grid-template-columns: 1fr; }
+  .card { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .meter i, button.cta, a.cta { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <span class="tag"><b>●</b> Fan petition</span>
+    <span class="tag">Not affiliated with Netflix or Rockstar Games</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">To Netflix &amp; Rockstar Games</p>
+        <h1>Give us <span class="clock" id="clock">15:00</span> in Leonida</h1>
+        <p class="lede">
+          Let Netflix subscribers play the <em>first 15 minutes of GTA VI</em>, on a single-day pass,
+          through the subscription they already pay for. Players who love it get a
+          <em>launch discount</em> to buy the full game.
+        </p>
+        <ul class="terms" aria-label="What we are asking for">
+          <li><b>15 min</b> of gameplay</li>
+          <li><b>1 day</b> access window</li>
+          <li><b>Netflix</b> subscribers</li>
+          <li><b>Discount</b> to buy, if Rockstar agrees</li>
+        </ul>
+
+        <div class="tally" aria-live="polite">
+          <div class="tally-num"><strong id="count">0</strong><span>of <span id="goal">100,000</span> signatures</span></div>
+          <div class="meter" role="progressbar" aria-label="Progress to goal" aria-valuemin="0" aria-valuemax="100000" aria-valuenow="0" id="meter"><i id="bar"></i></div>
+          <small id="status">Loading signatures…</small>
+        </div>
+
+        <div class="recent" id="recentWrap" hidden>
+          <h3>Latest signatures</h3>
+          <ul id="recent"></ul>
+        </div>
+      </div>
+
+      <div class="card" id="sign">
+        <div id="formView">
+          <p class="preview-note" id="previewNote" hidden>Preview mode: signatures stay in this browser until a backend is connected (see README).</p>
+          <h2>Add your name</h2>
+          <p>Takes 20 seconds. We only use your email to confirm you are a real person and to tell you if Netflix or Rockstar responds.</p>
+          <form id="petition" novalidate>
+            <div class="row">
+              <label for="name">Name
+                <input id="name" name="name" type="text" autocomplete="name" required maxlength="60" placeholder="Jordan Reyes">
+              </label>
+              <label for="country">Country
+                <input id="country" name="country" type="text" autocomplete="country-name" maxlength="40" placeholder="United States">
+              </label>
+            </div>
+            <label for="email">Email
+              <input id="email" name="email" type="email" autocomplete="email" required maxlength="120" placeholder="you@example.com">
+            </label>
+
+            <div class="pledge">
+              <label class="check" for="pledge">
+                <input id="pledge" name="pledge" type="checkbox" checked>
+                <span>I'd buy GTA VI at a launch discount after the trial
+                  <small>No payment is taken here. This tells Rockstar how many trial players would convert.</small>
+                </span>
+              </label>
+              <label for="platform">I play on
+                <select id="platform" name="platform">
+                  <option value="PS5">PlayStation 5</option>
+                  <option value="Xbox Series X|S">Xbox Series X|S</option>
+                  <option value="PC (when available)">PC (when available)</option>
+                  <option value="Not sure yet">Not sure yet</option>
+                </select>
+              </label>
+            </div>
+
+            <label for="comment">Why it matters to you (optional)
+              <textarea id="comment" name="comment" maxlength="280" placeholder="I want to try it before I spend $70."></textarea>
+            </label>
+
+            <label class="check" for="updates">
+              <input id="updates" name="updates" type="checkbox" checked>
+              <span>Email me if Netflix or Rockstar responds</span>
+            </label>
+
+            <div class="hp" aria-hidden="true"><label for="website">Website<input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+
+            <button class="cta" type="submit" id="submit">Sign the petition</button>
+            <p class="msg" id="msg" role="status"></p>
+            <p class="fine">Your name, country and comment may appear in the public signer list (first name and last initial only). Your email is never shown or sold.</p>
+          </form>
+        </div>
+
+        <div class="done" id="doneView" hidden>
+          <h2>You're in.</h2>
+          <p id="doneText">Thanks for signing. Every share gets this closer to Netflix's inbox.</p>
+          <div class="share">
+            <button type="button" id="copyLink">Copy link</button>
+            <a id="shareX" target="_blank" rel="noopener">Post on X</a>
+            <a id="shareWa" target="_blank" rel="noopener">WhatsApp</a>
+            <a id="shareFb" target="_blank" rel="noopener">Facebook</a>
+          </div>
+          <p class="fine" id="copyMsg"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="proposal">
+    <div class="wrap">
+      <h2>The proposal</h2>
+      <p class="intro">Netflix already runs a games catalog inside its subscription. A short, controlled GTA VI trial would be the biggest game demo ever offered there, and Rockstar keeps full control of when and how it happens.</p>
+      <div class="steps">
+        <div class="step">
+          <span class="t">00:00 – 15:00</span>
+          <h3>Play the opening</h3>
+          <p>Subscribers stream or download the first 15 minutes of the story. The session ends at the timer, with no progress carried into piracy-friendly builds.</p>
+        </div>
+        <div class="step">
+          <span class="t">24 HOURS</span>
+          <h3>One day only</h3>
+          <p>The trial runs as a single-day event, like a premiere night. Everyone plays together, the internet talks about it, and the hype lands in one moment.</p>
+        </div>
+        <div class="step">
+          <span class="t">AFTER THE TIMER</span>
+          <h3>Buy at a discount</h3>
+          <p>Players who want more get a time-limited launch discount to buy the full game, if Rockstar Games and Take-Two agree to offer one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="letter">
+    <div class="wrap">
+      <h2>The open letter</h2>
+      <p class="intro">This is what every signature is attached to.</p>
+      <article class="letter">
+        <p class="to">TO: Netflix Games<br>CC: Rockstar Games, Take-Two Interactive</p>
+        <p>We are GTA fans and Netflix subscribers. We have waited over a decade for Grand Theft Auto VI, and many of us want to feel the game before we buy it.</p>
+        <p>We are asking for a one-day event: every Netflix subscriber gets to play the first 15 minutes of GTA VI through their existing subscription. When the timer runs out, players who are hooked can buy the full game at a launch discount.</p>
+        <p>We know this only happens if Rockstar Games says yes. They built the game and the decision is theirs. This petition shows them how many people would show up, and how many would buy.</p>
+        <p>Fifteen minutes. One day. Give us a taste of Leonida.</p>
+        <p class="sig">The signers</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="block" id="faq">
+    <div class="wrap">
+      <h2>Questions</h2>
+      <div class="faq">
+        <details>
+          <summary>Is this official?</summary>
+          <p>No. This is an independent fan campaign. It is not run by, endorsed by, or connected to Netflix, Rockstar Games, or Take-Two Interactive. A trial only happens if they decide to offer one.</p>
+        </details>
+        <details>
+          <summary>Can I actually buy GTA VI here?</summary>
+          <p>No. Nothing is sold on this page and no payment is collected. The "I'd buy at a discount" box is a pledge that shows Rockstar how many trial players would convert. If a discount is ever offered, it will come from official stores.</p>
+        </details>
+        <details>
+          <summary>Why 15 minutes and one day?</summary>
+          <p>It is long enough to feel the world and short enough to protect the story. A single day turns it into a shared event instead of a demo people forget.</p>
+        </details>
+        <details>
+          <summary>What happens with my signature?</summary>
+          <p>When the count reaches meaningful milestones, the total, the pledge numbers and a selection of comments are sent to Netflix and Rockstar Games through their public contact and social channels.</p>
+        </details>
+        <details>
+          <summary>What do you do with my email?</summary>
+          <p>It is used to remove duplicate signatures and, if you ticked the box, to tell you when there is news. It is never displayed, sold or shared.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="closer">
+    <div class="wrap">
+      <h2>Fifteen minutes. One day. Sign it.</h2>
+      <a class="cta" href="#sign">Sign the petition</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Independent fan petition. Netflix is a trademark of Netflix, Inc. Grand Theft Auto, GTA and Rockstar Games are trademarks of Take-Two Interactive Software, Inc. They are used here only to identify the companies this petition is addressed to.</p>
+    <p>No purchase, payment or account is required to sign.</p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   CONFIG: paste your Google Apps Script web-app URL here.
+   Leave empty to run in preview mode (signatures saved only in
+   this browser). See README.md for the 5-minute setup.
+   ============================================================ */
+const ENDPOINT = "";
+const GOAL = 100000;
+
+const $ = (id) => document.getElementById(id);
+const fmt = (n) => Number(n || 0).toLocaleString("en-US");
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+
+/* ---- trial clock in the headline: counts 15:00 down once, for the vibe ---- */
+(function clock() {
+  const el = $("clock");
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let s = 15 * 60;
+  const tick = () => {
+    s = s > 0 ? s - 1 : 15 * 60;
+    el.textContent = String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+  };
+  setTimeout(() => setInterval(tick, 1000), 1500);
+})();
+
+/* ---- counter ---- */
+let shown = 0;
+function render(count, recent) {
+  const target = Math.max(0, count | 0);
+  const start = shown, t0 = performance.now(), dur = 900;
+  const step = (t) => {
+    const p = Math.min(1, (t - t0) / dur);
+    shown = Math.round(start + (target - start) * (1 - Math.pow(1 - p, 3)));
+    $("count").textContent = fmt(shown);
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+  const pct = Math.min(100, (target / GOAL) * 100);
+  $("bar").style.width = Math.max(pct, target > 0 ? 1 : 0) + "%";
+  $("meter").setAttribute("aria-valuenow", String(target));
+  $("goal").textContent = fmt(GOAL);
+  $("status").textContent = target >= GOAL
+    ? "Goal reached. Keep sharing, we're sending it in."
+    : fmt(GOAL - target) + " more to reach the goal";
+
+  if (Array.isArray(recent) && recent.length) {
+    const ul = $("recent");
+    ul.textContent = "";
+    recent.slice(0, 5).forEach((r) => {
+      const li = document.createElement("li");
+      const a = document.createElement("span");
+      const b = document.createElement("span");
+      a.textContent = r.name + (r.country ? " · " + r.country : "");
+      b.textContent = r.when || "";
+      li.append(a, b);
+      ul.append(li);
+    });
+    $("recentWrap").hidden = false;
+  }
+}
+
+function ago(ts) {
+  const d = (Date.now() - new Date(ts).getTime()) / 1000;
+  if (!isFinite(d)) return "";
+  if (d < 60) return "just now";
+  if (d < 3600) return Math.floor(d / 60) + "m ago";
+  if (d < 86400) return Math.floor(d / 3600) + "h ago";
+  return Math.floor(d / 86400) + "d ago";
+}
+function shortName(n) {
+  const parts = String(n || "").trim().split(/\s+/);
+  return parts[0] + (parts[1] ? " " + parts[1][0].toUpperCase() + "." : "");
+}
+
+async function load() {
+  if (!ENDPOINT) {
+    $("previewNote").hidden = false;
+    const local = store.get("gta6-local-signers", []);
+    render(local.length, local.slice().reverse().map((r) => ({ name: shortName(r.name), country: r.country, when: ago(r.ts) })));
+    $("status").textContent = "Preview mode · " + $("status").textContent;
+    return;
+  }
+  try {
+    const res = await fetch(ENDPOINT + "?action=stats", { cache: "no-store" });
+    const data = await res.json();
+    render(data.count, (data.recent || []).map((r) => ({ name: r.name, country: r.country, when: ago(r.ts) })));
+  } catch {
+    $("status").textContent = "Couldn't load the live count. Your signature still counts.";
+  }
+}
+
+/* ---- form ---- */
+const emailOk = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e);
+
+$("petition").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const f = ev.target;
+  const msg = $("msg");
+  msg.className = "msg";
+  msg.textContent = "";
+
+  const data = {
+    name: f.name.value.trim(),
+    email: f.email.value.trim().toLowerCase(),
+    country: f.country.value.trim(),
+    pledge: f.pledge.checked,
+    platform: f.platform.value,
+    comment: f.comment.value.trim(),
+    updates: f.updates.checked,
+    website: f.website.value
+  };
+  if (data.website) return; // bot
+  if (data.name.length < 2) { msg.className = "msg err"; msg.textContent = "Add your name so the signature counts."; f.name.focus(); return; }
+  if (!emailOk(data.email)) { msg.className = "msg err"; msg.textContent = "Check your email address. It looks incomplete."; f.email.focus(); return; }
+
+  const btn = $("submit");
+  btn.disabled = true;
+  btn.textContent = "Signing…";
+
+  try {
+    if (!ENDPOINT) {
+      const local = store.get("gta6-local-signers", []);
+      if (local.some((r) => r.email === data.email)) throw new Error("You've already signed with this email.");
+      local.push({ name: data.name, email: data.email, country: data.country, ts: new Date().toISOString() });
+      store.set("gta6-local-signers", local);
+      finish(data, local.length);
+    } else {
+      // text/plain keeps this a "simple" request, so Apps Script needs no CORS preflight.
+      const res = await fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) });
+      const out = await res.json();
+      if (!out.ok) throw new Error(out.error || "Something went wrong. Try again in a minute.");
+      finish(data, out.count);
+    }
+  } catch (err) {
+    msg.className = "msg err";
+    msg.textContent = err.message || "Couldn't reach the server. Check your connection and try again.";
+    btn.disabled = false;
+    btn.textContent = "Sign the petition";
+  }
+});
+
+function finish(data, count) {
+  store.set("gta6-signed", true);
+  $("formView").hidden = true;
+  $("doneView").hidden = false;
+  $("doneText").textContent = "Thanks, " + data.name.split(" ")[0] + ". You're signer #" + fmt(count) + ". Every share gets this closer to Netflix's inbox.";
+  load();
+}
+
+/* ---- sharing ---- */
+(function share() {
+  const url = location.href.split("#")[0];
+  const text = "I signed the petition asking Netflix & Rockstar for a 15-minute, one-day GTA VI trial for Netflix subscribers. Add your name:";
+  $("shareX").href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(url);
+  $("shareWa").href = "https://wa.me/?text=" + encodeURIComponent(text + " " + url);
+  $("shareFb").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
+  $("copyLink").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(url); $("copyMsg").textContent = "Link copied."; }
+    catch { $("copyMsg").textContent = url; }
+  });
+})();
+
+load();
+</script>
+</body>
+</html>
